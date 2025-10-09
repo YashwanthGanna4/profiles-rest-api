@@ -38,3 +38,21 @@ class UserProfileSerializer(serializers.ModelSerializer):
             instance.set_password(password)
 
         return super().update(instance, validated_data)
+
+"""class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    Serializes profile feed items
+
+    class Meta:
+        model = models.ProfileFeedItem
+        field = ('id', 'user_profile', 'status_text', 'created_on')
+        extra_kwargs = {
+            'user_profile': {'read_only': True}
+        }"""
+class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ProfileFeedItem  # Replace with your actual model name
+        fields = '__all__'
+        extra_kwargs = {
+                'user_profile': {'read_only': True}
+            }  # <--- Add this line
+        # exclude = ['some_field'] # DO NOT use both 'fields' and 'exclude'
